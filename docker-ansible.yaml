@@ -1,0 +1,7 @@
+---
+- name: install docker with ansible
+  hosts: tomcat
+  become: true
+  tasks:
+          - name: install docker 
+
