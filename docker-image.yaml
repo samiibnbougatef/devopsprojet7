@@ -1,0 +1,7 @@
+---
+- name: create docker image with ansible
+  hosts: tomcat
+  become: true
+  tasks:
+          - name: create docker image
+
