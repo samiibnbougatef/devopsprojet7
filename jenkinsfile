@@ -14,6 +14,7 @@ pipeline{
              sh 'mvn clean install package'
          }
      }
+<<<<<<< HEAD
     stage('docker'){
         steps{
         withCredentials([sshUserPrivateKey(credentialsId: 'ansadmin', keyFileVariable: '', usernameVariable: 'ansadmin')]) {
@@ -24,6 +25,13 @@ pipeline{
         }
         ansiblePlaybook credentialsId: 'ansadmin', installation: 'ansible', playbook: '/home/ansadmin/projet7/docker-ansible.yaml'
         ansiblePlaybook credentialsId: 'ansadmin', installation: 'ansible', playbook: '/home/ansadmin/projet7/docker-image.yaml'
+=======
+    stage('ansible tasks'){
+        steps{
+       
+        ansiblePlaybook disableHostKeyChecking: true , credentialsId: 'ansadmin', installation: 'ansible', playbook: '/home/ansadmin/projet7/docker-ansible.yaml'
+        ansiblePlaybook disableHostKeyChecking: true , credentialsId: 'ansadmin', installation: 'ansible', playbook: '/home/ansadmin/projet7/docker-image.yaml'
+>>>>>>> project 7 success
             
         }
     }

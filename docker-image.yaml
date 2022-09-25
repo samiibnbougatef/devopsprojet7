@@ -2,6 +2,34 @@
 - name: create docker image with ansible
   hosts: tomcat
   become: true
+  remote_user: ansadmin
   tasks:
-          - name: create docker image
+          - name: install python3-pip
+            apt:
+                    name: python3-pip
+                    state: present
 
+          - name: install docker-py
+            pip: 
+                 name: docker-py
+                 state: present  
+          - name: copy webapp to remote server
+            copy: src=/var/lib/jenkins/workspace/projet7/webapp/target/webapp.war dest=/home/ansadmin/projet7/ressources/webapp.war     
+       
+          - name: create docker image            
+            docker_image:
+                    force: yes
+                    name: ansibletest:latest              
+                    build:
+                            path: /home/ansadmin/projet7/.
+                    state: present 
+                    source: build
+
+          - name: run docker container from created image
+            docker_container:   
+                 name: ansible
+                 image: ansibletest 
+                 ports:
+                     - "8085:8080"   
+                 state: started         
+                 restart: yes
