@@ -23,8 +23,7 @@ pipeline{
             sh 'scp  /var/lib/jenkins/workspace/projet7/webapp/target/webapp.war ansadmin@3.1.25.173:/home/ansadmin/projet7/ressources/webapp.war'
           
         }
-        ansiblePlaybook credentialsId: 'ansadmin', installation: 'ansible', playbook: '/home/ansadmin/projet7/docker-ansible.yaml'
-        ansiblePlaybook credentialsId: 'ansadmin', installation: 'ansible', playbook: '/home/ansadmin/projet7/docker-image.yaml'
+        
 
     stage('ansible tasks'){
         steps{
